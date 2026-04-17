@@ -1,0 +1,47 @@
+.admin-dashboard {
+  padding: 40px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.admin-dashboard h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+
+.admin-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+
+.admin-actions button {
+  padding: 15px;
+  width: 200px;
+  background-color: #90ee90;
+  border: 1px solid #999;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.admin-actions button:hover {
+  background-color: #7ed37e;
+}
+
+
+.logout-btn {
+  margin-top: 40px;
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  border: none;
+  cursor: pointer;
+  color: white;
+  width: auto;
+}
+
+.logout-btn:hover {
+  background-color: #e05555;
+}

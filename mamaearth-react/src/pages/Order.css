@@ -1,0 +1,34 @@
+.order-container {
+  padding: 30px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  display: flex;
+  gap: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.order-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.place-order-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: auto;
+}

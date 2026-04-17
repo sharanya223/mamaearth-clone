@@ -1,0 +1,15 @@
+.pro {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    /*top: 
+    width:*/ 
+    width:100%;
+    height:100%;
+    margin-top: 100px;
+    background-color: antiquewhite;
+
+}
+.he{
+    color:rgb(102, 114, 214);
+}
