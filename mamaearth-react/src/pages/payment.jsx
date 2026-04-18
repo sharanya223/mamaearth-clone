@@ -29,7 +29,7 @@ function Payment() {
     
     if (paymentMethod === "COD") {
       try {
-        await axios.post("http://localhost:5000/checkout", {
+        await axios.post("https://mamaearth-clone-1-x7wj.onrender.com/checkout", {
           userId,
           products: data.products,
           totalAmount: data.totalAmount,
@@ -52,7 +52,7 @@ function Payment() {
     
     try {
       const { data: order } = await axios.post(
-        "http://localhost:5000/create-order",
+        "https://mamaearth-clone-1-x7wj.onrender.com/create-order",
         { amount: data.totalAmount }
       );
 
@@ -69,7 +69,7 @@ function Payment() {
           console.log("PAYMENT SUCCESS:", response);
 
           try {
-            await axios.post("http://localhost:5000/verify-payment", {
+            await axios.post("https://mamaearth-clone-1-x7wj.onrender.com/verify-payment", {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
