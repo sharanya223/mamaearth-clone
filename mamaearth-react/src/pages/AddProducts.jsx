@@ -39,7 +39,7 @@ function AddProducts() {
     try {
 
       await axios.post(
-        "http://localhost:5000/save-product-details",
+        "https://mamaearth-clone-1-x7wj.onrender.com/save-product-details",
         formData
       );
 
