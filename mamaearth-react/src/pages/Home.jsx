@@ -15,7 +15,7 @@ function Home() {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/manage-products");
+      const res = await axios.get("https://mamaearth-clone-1-x7wj.onrender.com/manage-products");
       setProducts(res.data);
     } catch (error) {
       console.log(error);
