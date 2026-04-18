@@ -33,7 +33,7 @@ function EditOrder() {
     try {
       
       for (let i = 0; i < order.products.length; i++) {
-        await axios.put(`http://localhost:5000/update-order/${id}`, {
+        await axios.put(`https://mamaearth-clone-1-x7wj.onrender.com/update-order/${id}`, {
           productIndex: i,
           quantity: order.products[i].quantity,
           status: order.status,
