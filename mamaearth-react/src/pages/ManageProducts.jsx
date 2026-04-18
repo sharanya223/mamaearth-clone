@@ -28,7 +28,7 @@ function ManageProducts() {
 
     try {
 
-      await axios.delete(`http://localhost:5000/delete-product/${id}`);
+      await axios.delete(`https://mamaearth-clone-1-x7wj.onrender.com/delete-product/${id}`);
 
       alert("Product deleted successfully");
 
@@ -81,7 +81,7 @@ return (
               <td>
 
                 <img
-                  src={`http://localhost:5000/uploads/${product.image}`}
+                  src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
                   alt={product.name}
                   width="60"
                 />
