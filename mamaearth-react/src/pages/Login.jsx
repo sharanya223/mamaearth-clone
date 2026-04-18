@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     axios
-    .post("http://localhost:5000/send-otp", { email })
+    .post("https://mamaearth-clone-1-x7wj.onrender.com/send-otp", { email })
     .then((res) => {
       alert("OTP sent to your email!");
 
