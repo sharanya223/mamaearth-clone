@@ -13,7 +13,7 @@ function  Yorder() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/manage-order");
+      const res = await axios.get("https://mamaearth-clone-1-x7wj.onrender.com/manage-order");
       setOrders(res.data);
     } catch (error) {
       console.log(error);
