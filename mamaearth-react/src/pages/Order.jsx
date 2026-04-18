@@ -23,7 +23,7 @@ function Order() {
   const fetchCart = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/get-cart/${userId}`
+        `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
       );
       setProducts(res.data.products || []);
     } catch (err) {
@@ -60,7 +60,7 @@ function Order() {
           {products.map((item) => (
             <div key={item.productId._id} className="order-card">
               <img
-                src={`http://localhost:5000/uploads/${item.productId.image}`}
+                src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${item.productId.image}`}
                 alt={item.productId.name}
               />
 
