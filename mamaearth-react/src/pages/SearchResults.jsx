@@ -15,7 +15,7 @@ function SearchResults() {
   const fetchResults = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/search/${query}`
+        `https://mamaearth-clone-1-x7wj.onrender.com/search/${query}`
       );
       setProducts(res.data);
     } catch (err) {
@@ -44,7 +44,7 @@ function SearchResults() {
                 <div className="product-image-box">
                   <img
                     className="product-image"
-                    src={`http://localhost:5000/uploads/${product.image}`}
+                    src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
                     alt={product.name}
                   />
                 </div>
