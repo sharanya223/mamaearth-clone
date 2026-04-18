@@ -24,7 +24,7 @@ function ProductDetails() {
     }
 
     try {
-      await axios.post("http://localhost:5000/add-to-cart", {
+      await axios.post("https://mamaearth-clone-1-x7wj.onrender.com/add-to-cart", {
         userId,
         productId: product._id
       });
@@ -40,7 +40,7 @@ function ProductDetails() {
   // Fetch single product
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/get-Product/${id}`);
+      const res = await axios.get(`https://mamaearth-clone-1-x7wj.onrender.com/get-Product/${id}`);
       setProduct(res.data);
     } catch (error) {
       console.log(error);
@@ -54,7 +54,7 @@ function ProductDetails() {
 
         <div className="image-section">
           <img
-            src={`http://localhost:5000/uploads/${product.image}`}
+            src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
             alt={product.name}
           />
         </div>
