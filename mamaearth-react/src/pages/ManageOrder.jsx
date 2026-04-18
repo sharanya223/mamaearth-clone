@@ -21,7 +21,7 @@ function ManageOrders() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-order/${id}`);
+      await axios.delete(`https://mamaearth-clone-1-x7wj.onrender.com/delete-order/${id}`);
       alert("Order deleted successfully");
       fetchOrders();
     } catch (error) {
