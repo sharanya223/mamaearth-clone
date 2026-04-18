@@ -23,7 +23,7 @@ function Signup() {
   e.preventDefault();
 
   axios
-    .post("http://localhost:5000/save-user-details", form)
+    .post("https://mamaearth-clone-1-x7wj.onrender.com/save-user-details", form)
     .then(() => {
       alert("Signup successful!");
       navigate("/");
