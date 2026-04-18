@@ -14,7 +14,7 @@ function ProductCart() {
     if (newQty < 1) return;
 
     try {
-      await axios.put("http://localhost:5000/update-cart", {
+      await axios.put("https://mamaearth-clone-1-x7wj.onrender.com/update-cart", {
         userId,
         productId,
         quantity: newQty,
@@ -35,7 +35,7 @@ function ProductCart() {
   
   const removeItem = async (productId) => {
     try {
-      await axios.delete("http://localhost:5000/remove-from-cart", {
+      await axios.delete("https://mamaearth-clone-1-x7wj.onrender.com/remove-from-cart", {
         data: { userId, productId },
       });
 
@@ -64,7 +64,7 @@ function ProductCart() {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/get-cart/${userId}`
+          `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
         );
 
         setCartItems(res.data.products || []);
@@ -104,7 +104,7 @@ function ProductCart() {
               <tr key={item.productId._id}>
                 <td>
                   <img
-                    src={`http://localhost:5000/uploads/${item.productId.image}`}
+                    src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${item.productId.image}`}
                     alt={item.productId.name}
                     className="cart-image"
                   />
