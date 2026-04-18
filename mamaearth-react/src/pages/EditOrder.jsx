@@ -15,7 +15,7 @@ function EditOrder() {
 
   const fetchOrder = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/get-order/${id}`);
+      const res = await axios.get(`https://mamaearth-clone-1-x7wj.onrender.com/get-order/${id}`);
       setOrder(res.data);
     } catch (error) {
       console.log(error);
