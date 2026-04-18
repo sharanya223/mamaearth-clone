@@ -18,7 +18,7 @@ function UpdateProduct() {
 
   useEffect(() => {
 
-    axios.get("http://localhost:5000/get-Product/" + id)
+    axios.get("https://mamaearth-clone-1-x7wj.onrender.com/get-Product/" + id)
       .then(result => {
 
         const product = result.data;
@@ -30,7 +30,7 @@ function UpdateProduct() {
         setDescription(product.description);
 
         // show current image
-        setPreview(`http://localhost:5000/uploads/${product.image}`);
+        setPreview(`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`);
 
       })
       .catch(err => console.log(err));
@@ -58,7 +58,7 @@ function UpdateProduct() {
     try {
 
       await axios.put(
-        "http://localhost:5000/update-products/" + id,
+        "https://mamaearth-clone-1-x7wj.onrender.com/update-products/" + id,
         formData,
        
       );
