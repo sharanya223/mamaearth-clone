@@ -11,7 +11,7 @@ function Otp() {
 
   const verifyOtp = async () => {
   try {
-    const res = await axios.post("http://localhost:5000/verify-otp", { email, otp });
+    const res = await axios.post("https://mamaearth-clone-1-x7wj.onrender.com/verify-otp", { email, otp });
 
     
     localStorage.setItem("userId", res.data.user._id);
