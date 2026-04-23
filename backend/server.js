@@ -9,8 +9,16 @@ const multer = require("multer");
 const Cart = require("./models/cart");
 const Order = require("./models/order");
 //const order = require("./models/order");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
   
 require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 console.log("KEY:", process.env.RAZORPAY_KEY_ID);
 console.log("SECRET:", process.env.RAZORPAY_SECRET);
@@ -23,16 +31,26 @@ app.use("/uploads", express.static("uploads"));
 //multer configuration
 
 
-const storage = multer.diskStorage({
+{/*const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
   }
+});*/}
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "products",
+    allowed_formats: ["jpg", "png", "jpeg", "webp", "avif"],
+  },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
+
+
+{/*const upload = multer({ storage: storage });*/}
 
 const Razorpay = require("razorpay");
 
@@ -168,7 +186,7 @@ app.post("/save-product-details", upload.single("image"), async (req, res) => {
 
     const { name, quantity, price, category, description, rating, reviews } = req.body;
 
-    const image = req.file.filename;
+    const image = req.file.path;
 
     const product = new Product({
       name,
