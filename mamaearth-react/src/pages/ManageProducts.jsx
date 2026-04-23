@@ -81,7 +81,7 @@ return (
               <td>
 
                 <img
-                  src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
+                  src={product.image}
                   alt={product.name}
                   width="60"
                 />

@@ -37,7 +37,7 @@ function Home() {
             <div className="product-image-box">
               <img
               className="product-image"
-              src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
+              src={product.image}
               alt={product.name}
               />
             </div>
