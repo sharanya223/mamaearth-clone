@@ -54,7 +54,7 @@ function ProductDetails() {
 
         <div className="image-section">
           <img
-            src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`}
+            src={product.image}
             alt={product.name}
           />
         </div>

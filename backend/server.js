@@ -8,17 +8,34 @@ const crypto = require("crypto");
 const multer = require("multer");
 const Cart = require("./models/cart");
 const Order = require("./models/order");
+//const puppeteer = require("puppeteer");
+const PDFDocument = require("pdfkit");
+const fs = require("fs");
+const path = require("path");
 //const order = require("./models/order");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
   
 require("dotenv").config();
 
+console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
+console.log("API Key:", process.env.CLOUDINARY_API_KEY);
+console.log(
+  "API Secret Exists:",
+  process.env.CLOUDINARY_API_SECRET ? "YES" : "NO"
+);
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+{/*cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});*/}
 
 console.log("KEY:", process.env.RAZORPAY_KEY_ID);
 console.log("SECRET:", process.env.RAZORPAY_SECRET);
@@ -41,12 +58,11 @@ app.use("/uploads", express.static("uploads"));
 });*/}
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
+  params: async (req, file) => ({
     folder: "products",
-    allowed_formats: ["jpg", "png", "jpeg", "webp", "avif"],
-  },
+    resource_type: "image"
+  }),
 });
-
 const upload = multer({ storage });
 
 
@@ -183,6 +199,7 @@ app.post("/save-user-details", async (req, res) => {
 app.post("/save-product-details", upload.single("image"), async (req, res) => {
 
   try {
+    console.log(req.file);
 
     const { name, quantity, price, category, description, rating, reviews } = req.body;
 
@@ -281,7 +298,7 @@ app.put('/update-products/:id', upload.single("image"), async (req, res) => {
 
     // if new image uploaded
     if (req.file) {
-      updatedData.image = req.file.filename;
+      updatedData.image = req.file.path;
     }
 
     const product = await Product.findByIdAndUpdate(
@@ -493,32 +510,72 @@ app.put("/update-order/:id", async (req, res) => {
     const { id } = req.params;
     const { productIndex, quantity, status, paymentMethod } = req.body;
 
-    const order = await Order.findById(id).populate("userId");
+    const order = await Order.findById(id)
+      .populate("userId")
+      .populate("products.productId");
 
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    
     if (quantity !== undefined && productIndex !== undefined) {
       order.products[productIndex].quantity = quantity;
     }
 
-    
     if (paymentMethod) {
       order.paymentMethod = paymentMethod;
     }
 
-   
-    if (status && status !== order.status) {
+    const oldStatus = order.status;
+
+    if (status && status !== oldStatus) {
+
+      const validForwardFlow =
+        (oldStatus === "Pending" && status === "Shipped") ||
+        (oldStatus === "Shipped" && status === "Delivered");
+
       order.status = status;
 
-      await transporter.sendMail({
-        from: "sharanyar716@gmail.com",
-        to: order.userId.email,
-        subject: "Order Status Update",
-        text: `Your order is now ${status}`,
-      });
+      if (validForwardFlow) {
+        const filePath = path.join(__dirname, `invoice_${order._id}.pdf`);
+
+        await new Promise((resolve, reject) => {
+          const doc = new PDFDocument({ margin: 40 });
+          const stream = fs.createWriteStream(filePath);
+
+          doc.pipe(stream);
+
+          doc.fontSize(22).text("Mamaearth Pvt Ltd", { align: "center" });
+          doc.moveDown();
+          doc.fontSize(16).text("TAX INVOICE", { align: "center" });
+
+          doc.moveDown();
+          doc.text(`Order ID: ${order._id}`);
+          doc.text(`Status: ${status}`);
+
+          doc.end();
+
+          stream.on("finish", resolve);
+          stream.on("error", reject);
+        });
+
+        await transporter.sendMail({
+          from: "sharanyar716@gmail.com",
+          to: order.userId.email,
+          subject: "Order Status Update",
+          text: `Your order is now ${status}. Invoice attached.`,
+          attachments: [
+            {
+              filename: "invoice.pdf",
+              path: filePath,
+            },
+          ],
+        });
+
+        if (fs.existsSync(filePath)) {
+  fs.unlinkSync(filePath);
+}
+      }
     }
 
     await order.save();
@@ -530,7 +587,6 @@ app.put("/update-order/:id", async (req, res) => {
     res.status(500).json({ message: "Error updating order" });
   }
 });
-
 //search product
 app.get("/search/:key", async (req, res) => {
   try {
@@ -610,7 +666,7 @@ app.post("/verify-payment", async (req, res) => {
    
     const formattedProducts = orderData.products.map((item) => ({
       productId: item.productId._id ? item.productId._id : item.productId,
-name: item.productId.name || item.name,
+  name: item.productId.name || item.name,
       quantity: item.quantity,
     }));
 
@@ -636,4 +692,28 @@ name: item.productId.name || item.name,
 app.listen(5000, () =>
   console.log("Server running on port 5000")
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

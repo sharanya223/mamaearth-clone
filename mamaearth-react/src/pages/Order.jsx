@@ -60,7 +60,7 @@ function Order() {
           {products.map((item) => (
             <div key={item.productId._id} className="order-card">
               <img
-                src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${item.productId.image}`}
+                src={item.productId.image}
                 alt={item.productId.name}
               />
 

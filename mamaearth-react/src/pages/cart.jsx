@@ -104,7 +104,7 @@ function ProductCart() {
               <tr key={item.productId._id}>
                 <td>
                   <img
-                    src={`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${item.productId.image}`}
+                    src={item.productId.image}
                     alt={item.productId.name}
                     className="cart-image"
                   />
