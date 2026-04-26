@@ -539,25 +539,78 @@ app.put("/update-order/:id", async (req, res) => {
       if (validForwardFlow) {
         const filePath = path.join(__dirname, `invoice_${order._id}.pdf`);
 
-        await new Promise((resolve, reject) => {
-          const doc = new PDFDocument({ margin: 40 });
-          const stream = fs.createWriteStream(filePath);
+await new Promise((resolve, reject) => {
+  const doc = new PDFDocument({ margin: 40 });
+  const stream = fs.createWriteStream(filePath);
 
-          doc.pipe(stream);
+  doc.pipe(stream);
 
-          doc.fontSize(22).text("Mamaearth Pvt Ltd", { align: "center" });
-          doc.moveDown();
-          doc.fontSize(16).text("TAX INVOICE", { align: "center" });
+  // Header
+  doc.fontSize(24).text("Mamaearth Pvt Ltd", { align: "center" });
+  doc.moveDown(0.5);
+  doc.fontSize(18).text("TAX INVOICE", { align: "center" });
 
-          doc.moveDown();
-          doc.text(`Order ID: ${order._id}`);
-          doc.text(`Status: ${status}`);
+  doc.moveDown();
 
-          doc.end();
+  // Order Info
+  doc.fontSize(12);
+  doc.text(`Order ID: ${order._id}`);
+  doc.text(`Date: ${new Date().toLocaleDateString()}`);
+  doc.text(`Status: ${status}`);
+  doc.text(`Payment Method: ${order.paymentMethod}`);
 
-          stream.on("finish", resolve);
-          stream.on("error", reject);
-        });
+  doc.moveDown();
+
+  // Customer Address
+  doc.fontSize(14).text("Billing Address:");
+  doc.fontSize(12);
+  doc.text(order.address.addressLine);
+  doc.text(`${order.address.city}, ${order.address.state}`);
+  doc.text(`Pincode: ${order.address.pincode}`);
+  doc.text(`Phone: ${order.address.phone}`);
+
+  doc.moveDown();
+
+  // Table Header
+  doc.fontSize(13).text("Item", 50, 280);
+  doc.text("Qty", 280, 280);
+  doc.text("Price", 350, 280);
+  doc.text("Total", 450, 280);
+
+  doc.moveTo(50, 300).lineTo(550, 300).stroke();
+
+  let y = 320;
+  let grandTotal = 0;
+
+  order.products.forEach((item) => {
+    const total = item.quantity * item.productId.price;
+    grandTotal += total;
+
+    doc.fontSize(11).text(item.productId.name, 50, y, { width: 200 });
+    doc.text(item.quantity, 280, y);
+    doc.text(`₹${item.productId.price}`, 350, y);
+    doc.text(`₹${total}`, 450, y);
+
+    y += 30;
+  });
+
+  doc.moveTo(50, y).lineTo(550, y).stroke();
+
+  y += 20;
+
+  doc.fontSize(14).text(`Grand Total: ₹${grandTotal}`, 380, y);
+
+  y += 50;
+
+  doc.fontSize(12).text("Thank you for shopping with Mamaearth!", {
+    align: "center",
+  });
+
+  doc.end();
+
+  stream.on("finish", resolve);
+  stream.on("error", reject);
+});
 
         await transporter.sendMail({
           from: "sharanyar716@gmail.com",
