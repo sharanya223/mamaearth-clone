@@ -742,6 +742,48 @@ app.post("/verify-payment", async (req, res) => {
   }
 });
 
+app.get("/admin-stats", async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalOrders = await Order.countDocuments();
+
+    const orders = await Order.find();
+
+    let totalRevenue = 0;
+    let paidPayments = 0;
+
+    let pending = 0;
+    let shipped = 0;
+    let delivered = 0;
+
+    orders.forEach((item) => {
+      totalRevenue += item.totalAmount || 0;
+
+      if (item.paymentId) {
+        paidPayments++;
+      }
+
+      if (item.status === "Pending") pending++;
+      if (item.status === "Shipped") shipped++;
+      if (item.status === "Delivered") delivered++;
+    });
+
+    res.json({
+      totalUsers,
+      totalOrders,
+      totalRevenue,
+      paidPayments,
+      pending,
+      shipped,
+      delivered,
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching stats" });
+  }
+});
+
 app.listen(5000, () =>
   console.log("Server running on port 5000")
 );
