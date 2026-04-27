@@ -25,16 +25,28 @@ function Order() {
       const res = await axios.get(
         `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
       );
-      setProducts(res.data.products || []);
+      //setProducts(res.data.products || []);
+      setProducts(
+  (res.data.products || []).filter(
+    (item) => item.productId !== null
+  )
+);
     } catch (err) {
       console.log(err);
     }
   };
 
+  //const totalPrice = products.reduce(
+    //(total, item) => total + item.productId.price * item.quantity,
+    //0
+  //);
   const totalPrice = products.reduce(
-    (total, item) => total + item.productId.price * item.quantity,
-    0
-  );
+  (total, item) =>
+    item.productId
+      ? total + item.productId.price * item.quantity
+      : total,
+  0
+);
 
   
   const handleProceed = () => {
@@ -57,7 +69,9 @@ function Order() {
 
       {products.length > 0 ? (
         <div className="order-list">
-          {products.map((item) => (
+  {products
+    .filter((item) => item.productId)
+    .map((item) => (
             <div key={item.productId._id} className="order-card">
               <img
                 src={item.productId.image}

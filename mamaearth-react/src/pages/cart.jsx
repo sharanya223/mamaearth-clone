@@ -21,8 +21,10 @@ function ProductCart() {
       });
 
       setCartItems((prev) =>//quick ui update in frontend
+        //prev.map((item) =>
+          //item.productId._id === productId
         prev.map((item) =>
-          item.productId._id === productId
+  item.productId && item.productId._id === productId
             ? { ...item, quantity: newQty }
             : item
         )
@@ -40,7 +42,9 @@ function ProductCart() {
       });
 
       setCartItems((prev) =>
-        prev.filter((item) => item.productId._id !== productId)//quick ui update in frontend
+        //prev.filter((item) => item.productId._id !== productId)
+        // //quick ui update in frontend
+        prev.filter((item) => item.productId && item.productId._id !== productId)
       );
     } catch (err) {
       console.log(err);
@@ -67,7 +71,12 @@ function ProductCart() {
           `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
         );
 
-        setCartItems(res.data.products || []);
+        //setCartItems(res.data.products || []);
+        setCartItems(
+  (res.data.products || []).filter(
+    (item) => item.productId !== null
+  )
+);
       } catch (error) {
         console.log(error);
       }
@@ -77,10 +86,17 @@ function ProductCart() {
   }, [userId]);
 
   
+  //const totalPrice = cartItems.reduce(
+    //(total, item) => total + item.productId.price * item.quantity,
+    //0
+  //);
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.productId.price * item.quantity,
-    0
-  );
+  (total, item) =>
+    item.productId
+      ? total + item.productId.price * item.quantity
+      : total,
+  0
+);
 
   return (
     <div className="cart-container">
@@ -100,7 +116,10 @@ function ProductCart() {
 
         <tbody>
           {cartItems.length > 0 ? (
-            cartItems.map((item) => (
+            //cartItems.map((item) => (
+              cartItems
+  .filter((item) => item.productId)
+  .map((item) => (
               <tr key={item.productId._id}>
                 <td>
                   <img

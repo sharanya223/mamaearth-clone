@@ -699,47 +699,64 @@ app.post("/create-order", async (req, res) => {
   }
 });
 //verify api
+
+
 app.post("/verify-payment", async (req, res) => {
   try {
     const {
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
-      orderData
+      orderData,
     } = req.body;
 
+    // Signature verify
     const generated_signature = crypto
       .createHmac("sha256", process.env.RAZORPAY_SECRET)
       .update(razorpay_order_id + "|" + razorpay_payment_id)
       .digest("hex");
 
     if (generated_signature !== razorpay_signature) {
-      return res.status(400).json({ message: "Payment verification failed" });
+      return res
+        .status(400)
+        .json({ message: "Payment verification failed" });
     }
 
-   
-    const formattedProducts = orderData.products.map((item) => ({
-      productId: item.productId._id ? item.productId._id : item.productId,
-  name: item.productId.name || item.name,
-      quantity: item.quantity,
-    }));
+    // Safe products array
+    const formattedProducts = (orderData.products || [])
+      .filter((item) => item && item.productId)
+      .map((item) => ({
+        productId:
+          item.productId._id || item.productId,
+        name:
+          item.productId.name || item.name || "Product",
+        quantity: item.quantity || 1,
+      }));
 
     const newOrder = new Order({
       userId: orderData.userId,
       products: formattedProducts,
-      totalAmount: orderData.totalAmount,
-      address: orderData.address,
-      paymentMethod: orderData.paymentMethod,
+      totalAmount: orderData.totalAmount || 0,
+      address: orderData.address || {},
+      paymentMethod:
+        orderData.paymentMethod || "Online",
       paymentId: razorpay_payment_id,
+      status: "Confirmed",
     });
 
     await newOrder.save();
 
-    res.json({ message: "Payment verified & order saved" });
+    res.json({
+      success: true,
+      message: "Payment verified & order saved",
+    });
 
   } catch (err) {
     console.log("VERIFY ERROR:", err);
-    res.status(500).json({ message: "Verification failed" });
+    res.status(500).json({
+      success: false,
+      message: "Verification failed",
+    });
   }
 });
 
