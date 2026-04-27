@@ -134,3 +134,27 @@
   border-radius: 8px;
   cursor: pointer;
 }
+.top-buttons{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  margin:20px 0 30px;
+  flex-wrap:wrap;
+}
+
+.top-buttons button{
+  background:linear-gradient(135deg,#0984e3,#00cec9);
+  color:white;
+  border:none;
+  padding:14px 28px;
+  font-size:16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+  transition:0.3s;
+}
+
+.top-buttons button:hover{
+  transform:translateY(-3px);
+}

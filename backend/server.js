@@ -465,6 +465,7 @@ app.get("/manage-order", async (req, res) => {
   try {
     const orders = await Order.find()
       .populate("products.productId");
+       console.log(JSON.stringify(orders, null, 2)); 
 
     res.json(orders);
   } catch (error) {

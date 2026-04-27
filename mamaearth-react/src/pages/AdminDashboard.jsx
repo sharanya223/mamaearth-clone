@@ -3,7 +3,8 @@ import axios from "axios";
 import {
   PieChart, Pie, Cell,
   BarChart, Bar, XAxis, YAxis,
-  Tooltip, ResponsiveContainer
+  Tooltip, ResponsiveContainer,
+  Legend
 } from "recharts";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
@@ -46,6 +47,13 @@ function AdminDashboard() {
     <div className="dashboard">
 
       <h1>Admin Dashboard</h1>
+
+      <div className="top-buttons">
+  <button onClick={() => navigate("/add-product")}>➕ Add Product</button>
+  <button onClick={() => navigate("/manage-products")}>📦 Manage Products</button>
+  <button onClick={() => navigate("/manage-orders")}>🛒 Manage Orders</button>
+   <button onClick={() => navigate("/")}>🚪 Logout</button>
+</div>
 
       <div className="cards">
 
@@ -91,29 +99,35 @@ function AdminDashboard() {
           <h3>Order Status</h3>
 
           <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                outerRadius={100}
-                label
-              >
-                <Cell fill="#f39c12" />
-                <Cell fill="#3498db" />
-                <Cell fill="#2ecc71" />
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
+  <PieChart>
+    <Pie
+      data={pieData}
+      dataKey="value"
+      cx="50%"
+      cy="50%"
+      outerRadius={100}
+      label={({ name, percent }) =>
+        `${name} ${(percent * 100).toFixed(0)}%`
+      }
+    >
+      <Cell fill="#f39c12" />
+      <Cell fill="#3498db" />
+      <Cell fill="#2ecc71" />
+    </Pie>
+    <Tooltip />
+    <Legend />
+  </PieChart>
+</ResponsiveContainer>
 
         </div>
 
       </div>
 
-      <div className="buttons">
+      {/*<div className="buttons">
         <button onClick={() => navigate("/add-product")}>Add Product</button>
         <button onClick={() => navigate("/manage-products")}>Manage Products</button>
         <button onClick={() => navigate("/manage-orders")}>Manage Orders</button>
-      </div>
+      </div>*/}
 
     </div>
   );

@@ -126,10 +126,27 @@ function AddProducts() {
             <option value="">Select Category</option>
             <option value="shampoo">Shampoo</option>
             <option value="face-wash">Face Wash</option>
+             <option value="sunscreen">Sunscreen</option>
             <option value="hair-conditioner">Hair Conditioner</option>
-            <option value="face-cream">face Cream</option>
-            <option value="serum">Serum</option>
+            <option value="face-cream">Face Cream</option>
+            <option value="serum">Face Serum</option>
             <option value="hair-oil">Hair oil</option>
+             <option value="hair-serum">Hair Serum</option>
+             <option value="lipstick">Lipstick</option>
+             <option value="kajal">Kajal</option>
+             <option value="compact">Compact</option>
+             <option value="body wash">Body Wash</option>
+             <option value="body lotion">Body Lotion</option>
+             <option value="soap">Soap</option>
+             <option value="scrub">Scrub</option>
+             <option value="baby shampoo">Baby Shampoo</option>
+             <option value="baby wash">Baby Wash</option>
+             <option value="baby soap">Baby Soap</option>
+             <option value="baby oil">Baby Oil</option>
+            
+            
+             
+             
           </select>
 
           <textarea
