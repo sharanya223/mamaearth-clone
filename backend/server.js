@@ -741,7 +741,7 @@ app.post("/verify-payment", async (req, res) => {
       paymentMethod:
         orderData.paymentMethod || "Online",
       paymentId: razorpay_payment_id,
-      status: "Confirmed",
+      status: "Pending",
     });
 
     await newOrder.save();

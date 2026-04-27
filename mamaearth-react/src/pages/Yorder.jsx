@@ -37,10 +37,7 @@ function Yorder() {
         {orders.map((order) =>
           order.products.map((p, index) => {
 
-            const imagePath =
-              p.productId?.image
-                ? `https://mamaearth-clone-1-x7wj.onrender.com/uploads/${p.productId.image}`
-                : null;
+           const imagePath = p.productId?.image || null;
 
             return (
               <div
