@@ -1,8 +1,25 @@
 .order-container {
-  padding: 30px;
+  padding: 40px 60px;
+  background: #f8f9fa;
+  min-height: auto;
 }
 
+.order-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+.order-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* LEFT SIDE */
 .order-list {
+  flex: 2;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -10,25 +27,85 @@
 
 .order-card {
   display: flex;
-  gap: 20px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 10px;
-  align-items: center;
+  gap: 25px;
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  align-items:center;
 }
 
 .order-card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.order-info h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.order-info p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 16px;
+}
+
+/* RIGHT SIDE */
+.summary-box {
+  flex: 1;
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.summary-box h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 17px;
+  color: #444;
+}
+
+.summary-total {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .place-order-btn {
   margin-top: 20px;
-  padding: 10px 20px;
-  background-color: green;
+  width: 100%;
+  padding: 14px;
+  background: #00a651;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-size: 18px;
   cursor: pointer;
-  width: auto;
+  transition: 0.3s;
+}
+
+.place-order-btn:hover {
+  background: #008f45;
+}
+
+.empty-text {
+  font-size: 18px;
+  color: gray;
 }

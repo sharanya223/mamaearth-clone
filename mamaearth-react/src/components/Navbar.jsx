@@ -106,34 +106,44 @@ function Navbar() {
         </div>
 
         <div className="nav-right">
-          <Link to="/cart" className="nav-item">
-            <img src="/shopping-cart.png" alt="Cart" />
-            <span>Cart</span>
-          </Link>
 
-          {isLogin ? (
-            <div className="nav-item" onClick={handleLogout}>
-              <img src="/login.png" alt="Logout" />
-              <span>Logout</span>
-            </div>
-          ) : (
-            <Link to="/login" className="nav-item">
-              <img src="/login.png" alt="Login" />
-              <span>Login</span>
-            </Link>
-          )}
+  <Link to="/cart" className="nav-item">
+    <img src="/shopping-cart.png" alt="Cart" />
+    <span>Cart</span>
+  </Link>
 
-          <Link to="/profile" className="nav-item">
-            <img src="/8847419-profile.png" alt="Profile" />
-            <span>Profile</span>
-          </Link>
+  {/* Always show Admin */}
+  <Link to="/adminlogin" className="nav-item">
+    <img src="/login.png" alt="Admin" />
+    <span>Admin</span>
+  </Link>
 
-          <Link to="/yorder" className="nav-item">
-            <img src="/images-order.png" alt="Order" />
-            <span>Order</span>
-          </Link>
-        </div>
+  {isLogin ? (
+    <>
+      <Link to="/profile" className="nav-item">
+        <img src="/8847419-profile.png" alt="Profile" />
+        <span>Profile</span>
+      </Link>
+
+      <Link to="/yorder" className="nav-item">
+        <img src="/images-order.png" alt="Order" />
+        <span>Order</span>
+      </Link>
+
+      <div className="nav-item" onClick={handleLogout}>
+        <img src="/login.png" alt="Logout" />
+        <span>Logout</span>
       </div>
+    </>
+  ) : (
+    <Link to="/login" className="nav-item">
+      <img src="/login.png" alt="Login" />
+      <span>Login</span>
+    </Link>
+  )}
+
+</div>
+</div>
 
       <div className="menu-bar">
         <div className="menu-link" onClick={() => navigate("/")}>

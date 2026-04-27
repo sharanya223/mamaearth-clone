@@ -746,6 +746,34 @@ app.post("/verify-payment", async (req, res) => {
 
     await newOrder.save();
 
+     // ---------------- CART REMOVE LOGIC ----------------
+    const cart = await Cart.findOne({ userId: orderData.userId });
+
+if (cart) {
+  if (orderData.isBuyNow) {
+
+    const orderedIds = orderData.products.map((p) =>
+      String(p.productId?._id || p.productId)
+    );
+    // ADD HERE 👇
+        console.log("orderedIds:", orderedIds);
+        console.log(
+          "cartIds:",
+          cart.products.map((i) => String(i.productId))
+        );
+
+    cart.products = cart.products.filter((item) =>
+      !orderedIds.includes(String(item.productId))
+    );
+
+  } else {
+    cart.products = [];
+  }
+
+  await cart.save();
+}
+    // ---------------------------------------------------
+
     res.json({
       success: true,
       message: "Payment verified & order saved",

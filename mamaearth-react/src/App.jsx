@@ -49,9 +49,24 @@ function App() {
         <Route path="/add-product" element={<AddProducts />} />
         <Route path="/manage-products" element={<ManageProducts />} />
         <Route path="/update-products/:id" element={<UpdateProduct />}/>
-        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route
+  path="/product/:id"
+  element={
+    <>
+      <Navbar />
+      <ProductDetails />
+      <Footer />
+    </>
+  }
+/>
         <Route path="/cart" element={<ProductCart />} />
-        <Route path="/Order" element={<Order />} />
+        <Route path="/Order" element={
+          <>
+          <Order />
+          <Footer />
+          </>
+        }
+        />
         <Route path="/payment" element={<Payment />} />
         <Route path="/address" element={<Address />} />
         <Route path="/manage-orders" element={<ManageOrders />} />

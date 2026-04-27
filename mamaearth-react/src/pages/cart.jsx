@@ -52,11 +52,19 @@ function ProductCart() {
   };
 
   
+  //const handleBuyNow = (item) => {
+    //navigate("/order", {
+      //state: { singleProduct: item },
+    //});
+  //};
   const handleBuyNow = (item) => {
-    navigate("/order", {
-      state: { singleProduct: item },
-    });
-  };
+  navigate("/order", {
+    state: {
+      singleProduct: item,
+      isBuyNow: true
+    },
+  });
+};
 
   
   useEffect(() => {
