@@ -123,12 +123,12 @@ function Navbar() {
             </Link>
           )}
 
-          <Link to="/Profile" className="nav-item">
+          <Link to="/profile" className="nav-item">
             <img src="/8847419-profile.png" alt="Profile" />
             <span>Profile</span>
           </Link>
 
-          <Link to="/Yorder" className="nav-item">
+          <Link to="/yorder" className="nav-item">
             <img src="/images-order.png" alt="Order" />
             <span>Order</span>
           </Link>
