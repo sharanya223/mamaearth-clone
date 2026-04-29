@@ -82,13 +82,24 @@ mongoose
   .then(() => console.log("MongoDB Atlas Connected"))
   .catch((err) => console.log(err));
 // Email transporter
+// Email transporter
 const transporter = nodemailer.createTransport({
-  service: "gmail",//use gmails smtp server to send email connect to gmails mail server to send otp
-  auth: { //authetication to send email 
-    user: "sharanyar716@gmail.com",
-    pass: "pada bhzv excn jwqz",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
+  family: 4,
+  tls: {
+    rejectUnauthorized: false,
+  },
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
 });
+
 
 // Generate OTP
 const generateOTP = () => {
@@ -120,7 +131,7 @@ app.post("/send-otp", async (req, res) => {
     await user.save();//save otp in mongo
 
     await transporter.sendMail({//sending otp
-      from: "sharanyar716@gmail.com",
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "Your OTP for Login",
       text: `Your OTP is: ${otp}`,
@@ -614,7 +625,7 @@ await new Promise((resolve, reject) => {///
 });
 
         await transporter.sendMail({
-          from: "sharanyar716@gmail.com",
+          from: process.env.EMAIL_USER,
           to: order.userId.email,
           subject: "Order Status Update",
           text: `Your order is now ${status}. Invoice attached.`,
