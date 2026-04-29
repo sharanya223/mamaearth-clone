@@ -44,7 +44,7 @@ function Order() {
     0
   );
 
-  const handleProceed = () => {
+  const handleProceed = () => {///
     console.log("BuyNow value:", location.state?.isBuyNow);
     const checkoutData = {
       products,

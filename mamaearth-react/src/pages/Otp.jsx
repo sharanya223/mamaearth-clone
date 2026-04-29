@@ -17,7 +17,7 @@ function Otp() {
     localStorage.setItem("userId", res.data.user._id);
 
   
-    localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("user", JSON.stringify(res.data.user));//entire user details will be saved in string format
 
     if (res.data.alreadyRegistered) {
       navigate("/");   // existing user =home

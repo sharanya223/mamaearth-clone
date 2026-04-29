@@ -29,7 +29,7 @@ function UpdateProduct() {
         setCategory(product.category);
         setDescription(product.description);
 
-        // show current image
+        
         setPreview(`https://mamaearth-clone-1-x7wj.onrender.com/uploads/${product.image}`);
 
       })

@@ -203,7 +203,7 @@ app.post("/save-product-details", upload.single("image"), async (req, res) => {
 
     const { name, quantity, price, category, description, rating, reviews } = req.body;
 
-    const image = req.file.path;
+    const image = req.file.path;//cloudinary image url
 
     const product = new Product({
       name,
@@ -327,7 +327,7 @@ app.post("/add-to-cart", async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId,
-        products: [{ productId, quantity: 1 }]
+        products: [{ productId, quantity: 1 }]///
       });
     } else {
      
@@ -357,7 +357,7 @@ app.get("/get-cart/:userId", async (req, res) => {
     const cart = await Cart.findOne({ userId })
       .populate("products.productId"); // fetch full product details
 
-    if (!cart) {
+    if (!cart) {//if no pro return empty
       return res.json({ products: [] });
     }
 
@@ -367,7 +367,7 @@ app.get("/get-cart/:userId", async (req, res) => {
     res.status(500).json(err);
   }
 });
-app.put("/update-cart", async (req, res) => {
+app.put("/update-cart", async (req, res) => {///
   try {
     const { userId, productId, quantity } = req.body;
 
@@ -395,7 +395,7 @@ app.delete("/remove-from-cart", async (req, res) => {
 
     const cart = await Cart.findOne({ userId });
 
-    cart.products = cart.products.filter(
+    cart.products = cart.products.filter(///
       (p) => p.productId.toString() !== productId
     );
 
@@ -540,7 +540,7 @@ app.put("/update-order/:id", async (req, res) => {
       if (validForwardFlow) {
         const filePath = path.join(__dirname, `invoice_${order._id}.pdf`);
 
-await new Promise((resolve, reject) => {
+await new Promise((resolve, reject) => {///
   const doc = new PDFDocument({ margin: 40 });
   const stream = fs.createWriteStream(filePath);
 
@@ -683,13 +683,13 @@ app.post("/create-order", async (req, res) => {
   try {
     const { amount } = req.body;
 
-    const options = {
+    const options = {//
       amount: amount * 100, 
       currency: "INR",
       receipt: "receipt_" + Date.now(),
     };
 
-    const order = await razorpay.orders.create(options);
+    const order = await razorpay.orders.create(options);//
 
     res.json(order);
 
@@ -723,7 +723,7 @@ app.post("/verify-payment", async (req, res) => {
     }
 
     // Safe products array
-    const formattedProducts = (orderData.products || [])
+    const formattedProducts = (orderData.products || [])///
       .filter((item) => item && item.productId)
       .map((item) => ({
         productId:
@@ -746,7 +746,7 @@ app.post("/verify-payment", async (req, res) => {
 
     await newOrder.save();
 
-     // ---------------- CART REMOVE LOGIC ----------------
+     // cart remove
     const cart = await Cart.findOne({ userId: orderData.userId });
 
 if (cart) {
@@ -755,8 +755,8 @@ if (cart) {
     const orderedIds = orderData.products.map((p) =>
       String(p.productId?._id || p.productId)
     );
-    // ADD HERE 👇
-        console.log("orderedIds:", orderedIds);
+    
+        console.log("orderedIds:", orderedIds);///
         console.log(
           "cartIds:",
           cart.products.map((i) => String(i.productId))
@@ -772,7 +772,7 @@ if (cart) {
 
   await cart.save();
 }
-    // ---------------------------------------------------
+    
 
     res.json({
       success: true,

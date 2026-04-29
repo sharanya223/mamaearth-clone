@@ -23,8 +23,8 @@ function EditOrder() {
   };
 
   const handleChange = (index, field, value) => {
-    const updatedProducts = [...order.products];
-    updatedProducts[index][field] = value;
+    const updatedProducts = [...order.products];//make copy of the products array
+    updatedProducts[index][field] = value;//changes product quantity
 
     setOrder({ ...order, products: updatedProducts });
   };
@@ -32,7 +32,7 @@ function EditOrder() {
   const handleSave = async () => {
     try {
       
-      for (let i = 0; i < order.products.length; i++) {
+      for (let i = 0; i < order.products.length; i++) {//one order contains multiple products
         await axios.put(`https://mamaearth-clone-1-x7wj.onrender.com/update-order/${id}`, {
           productIndex: i,
           quantity: order.products[i].quantity,

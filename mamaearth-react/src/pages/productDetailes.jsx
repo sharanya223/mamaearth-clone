@@ -16,7 +16,7 @@ function ProductDetails() {
 
   
   const addProduct = async () => {
-    const userId = localStorage.getItem("userId"); // make sure login stores this
+    const userId = localStorage.getItem("userId"); 
 
     if (!userId) {
       alert("Please login first");

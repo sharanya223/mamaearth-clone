@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import Navbar from "../components/Navbar"; // ✅ add navbar
-import "./Home.css"; // reuse same styling
+import Navbar from "../components/Navbar"; 
+import "./Home.css";
 
 function SearchResults() {
   const { query } = useParams();
@@ -25,17 +25,17 @@ function SearchResults() {
 
   return (
     <>
-      {/* ✅ Navbar on top */}
+      
       <Navbar />
 
       <div className="home-container">
         
-        {/* ✅ Styled title */}
+        
         <h2 className="home-title">
           Search Results for "{query}"
         </h2>
 
-        {/* ✅ Product grid same as home */}
+       
         <div className="product-grid">
           {products.length > 0 ? (
             products.map((product) => (
@@ -59,7 +59,7 @@ function SearchResults() {
               </div>
             ))
           ) : (
-            <h3>No products found 😢</h3>
+            <h3>No products found </h3>
           )}
         </div>
 

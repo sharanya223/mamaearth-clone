@@ -45,7 +45,7 @@ function Yorder() {
                 key={`${order._id}-${index}`}
               >
 
-                {/* Product Image */}
+               
                 {imagePath ? (
                   <img
                     src={imagePath}
@@ -59,27 +59,27 @@ function Yorder() {
                   <div className="order-img no-image">🛍️</div>
                 )}
 
-                {/* Product Name */}
+                
                 <h3>
                   {p.productId?.name || p.name || "Product"}
                 </h3>
 
-                {/* Quantity */}
+               
                 <p>
                   <strong>Qty:</strong> {p.quantity}
                 </p>
 
-                {/* Amount */}
+               
                 <p>
                   <strong>Total:</strong> ₹{order.totalAmount}
                 </p>
 
-                {/* Payment */}
+              
                 <p>
                   <strong>Payment:</strong> {order.paymentMethod}
                 </p>
 
-                {/* Status */}
+                
                 <p
                   className={`status ${order.status.toLowerCase()}`}
                 >

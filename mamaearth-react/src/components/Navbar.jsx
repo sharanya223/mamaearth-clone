@@ -112,7 +112,7 @@ function Navbar() {
     <span>Cart</span>
   </Link>
 
-  {/* Always show Admin */}
+ 
   <Link to="/adminlogin" className="nav-item">
     <img src="/login.png" alt="Admin" />
     <span>Admin</span>

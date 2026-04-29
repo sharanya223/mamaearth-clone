@@ -71,7 +71,7 @@ function App() {
         <Route path="/address" element={<Address />} />
         <Route path="/manage-orders" element={<ManageOrders />} />
         <Route path="/edit-order/:id" element={<EditOrder />} />
-        {/*<Route path="/search/:query" element={<SearchResults />} />*/}
+       
         <Route
   path="/search/:query"
   element={

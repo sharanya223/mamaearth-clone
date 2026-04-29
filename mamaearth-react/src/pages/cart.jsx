@@ -11,7 +11,7 @@ function ProductCart() {
 
   
   const updateQuantity = async (productId, newQty) => {
-    if (newQty < 1) return;
+    if (newQty < 1) return;//less then one stop
 
     try {
       await axios.put("https://mamaearth-clone-1-x7wj.onrender.com/update-cart", {
@@ -20,10 +20,10 @@ function ProductCart() {
         quantity: newQty,
       });
 
-      setCartItems((prev) =>//quick ui update in frontend
+      setCartItems((prev) =>//quick ui update of quantity in frontend
         //prev.map((item) =>
           //item.productId._id === productId
-        prev.map((item) =>
+        prev.map((item) =>///
   item.productId && item.productId._id === productId
             ? { ...item, quantity: newQty }
             : item
@@ -44,7 +44,7 @@ function ProductCart() {
       setCartItems((prev) =>
         //prev.filter((item) => item.productId._id !== productId)
         // //quick ui update in frontend
-        prev.filter((item) => item.productId && item.productId._id !== productId)
+        prev.filter((item) => item.productId && item.productId._id !== productId)///
       );
     } catch (err) {
       console.log(err);
@@ -80,7 +80,7 @@ function ProductCart() {
         );
 
         //setCartItems(res.data.products || []);
-        setCartItems(
+        setCartItems(//if any products are broken or not having pro id it will filter out that products
   (res.data.products || []).filter(
     (item) => item.productId !== null
   )
@@ -98,7 +98,7 @@ function ProductCart() {
     //(total, item) => total + item.productId.price * item.quantity,
     //0
   //);
-  const totalPrice = cartItems.reduce(
+  const totalPrice = cartItems.reduce(// for each price *quqntity is done 
   (total, item) =>
     item.productId
       ? total + item.productId.price * item.quantity
@@ -207,7 +207,7 @@ function ProductCart() {
 
               <button
                 className="checkout-btn"
-                disabled={cartItems.length === 0}
+                disabled={cartItems.length === 0}//is emty becomes true and disabled =>cannot be clicked
                 onClick={() => navigate("/order")}
                 style={{ marginLeft: "20px" }}
               >

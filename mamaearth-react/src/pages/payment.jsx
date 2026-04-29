@@ -10,8 +10,8 @@ function Payment() {
   const data =
   location.state || JSON.parse(localStorage.getItem("checkoutData")) || {};
 
-  if (!data || !data.products) {
-  alert("Session expired. Please checkout again.");
+  if (!data || !data.products) {//means sessin expired
+  alert("Session expired. Please checkout again.");///
   navigate("/cart");
   return null;
 }
@@ -56,7 +56,7 @@ function Payment() {
         { amount: data.totalAmount }
       );
 
-      const options = {
+      const options = {//used to match payment request
        key: "rzp_test_SabMg6QBJZmARS",
         amount: order.amount,
         currency: "INR",
@@ -104,7 +104,7 @@ function Payment() {
         },
       };
 
-    const rzp = new window.Razorpay(options);
+    const rzp = new window.Razorpay(options);//razorpay popup
 
 rzp.on("payment.failed", function (response) {
   console.log("PAYMENT FAILED:", response);

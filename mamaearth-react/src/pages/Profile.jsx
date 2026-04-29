@@ -1,48 +1,4 @@
-{/*import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./Profile.css";
 
-function Profile() {
-      console.log(localStorage);
-  const navigate = useNavigate();
-
-  const user = localStorage.getItem("user");
-  const userEmail = localStorage.getItem("userEmail");
-  const userId = localStorage.getItem("userId");
-
-  return (
-    <div className="profile-page">
-
-      <div className="profile-card">
-
-        <div className="profile-top">
-          <div className="avatar">
-            {userEmail ? userEmail.charAt(0).toUpperCase() : "U"}
-          </div>
-
-          <h2>My Profile</h2>
-        </div>
-
-        <div className="profile-info">
-          <p><strong>User ID:</strong> {userId}</p>
-          <p><strong>Email:</strong> {userEmail}</p>
-          <p><strong>Status:</strong> Verified ✅</p>
-        </div>
-
-        <button
-          className="home-btn"
-          onClick={() => navigate("/")}
-        >
-          Back to Home
-        </button>
-
-      </div>
-
-    </div>
-  );
-}
-
-export default Profile;*/}
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";

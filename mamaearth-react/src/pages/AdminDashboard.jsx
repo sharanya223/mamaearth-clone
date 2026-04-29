@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
+import {//
   PieChart, Pie, Cell,
   BarChart, Bar, XAxis, YAxis,
   Tooltip, ResponsiveContainer,
@@ -31,7 +31,7 @@ function AdminDashboard() {
     setStats(res.data);
   };
 
-  const pieData = [
+  const pieData = [//
     { name: "Pending", value: stats.pending },
     { name: "Shipped", value: stats.shipped },
     { name: "Delivered", value: stats.delivered },
