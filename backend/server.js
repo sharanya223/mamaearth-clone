@@ -99,6 +99,10 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 20000,
   socketTimeout: 20000,
 });
+//ADD THIS BELOW transporter
+transporter.verify((err, success) => {
+  console.log(err || "SMTP Ready");
+});
 
 
 // Generate OTP
