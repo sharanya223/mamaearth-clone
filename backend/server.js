@@ -82,7 +82,7 @@ mongoose
   .then(() => console.log("MongoDB Atlas Connected"))
   .catch((err) => console.log(err));
 // Email transporter
-// Email transporter
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -99,7 +99,8 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 20000,
   socketTimeout: 20000,
 });
-//ADD THIS BELOW transporter
+
+
 transporter.verify((err, success) => {
   console.log(err || "SMTP Ready");
 });
@@ -555,21 +556,20 @@ app.put("/update-order/:id", async (req, res) => {
       if (validForwardFlow) {
         const filePath = path.join(__dirname, `invoice_${order._id}.pdf`);
 
-await new Promise((resolve, reject) => {///
+await new Promise((resolve, reject) => {
   const doc = new PDFDocument({ margin: 40 });
   const stream = fs.createWriteStream(filePath);
 
   doc.pipe(stream);
 
-  // Header
+  
   doc.fontSize(24).text("Mamaearth Pvt Ltd", { align: "center" });
   doc.moveDown(0.5);
   doc.fontSize(18).text("TAX INVOICE", { align: "center" });
 
   doc.moveDown();
 
-  // Order Info
-  doc.fontSize(12);
+   doc.fontSize(12);
   doc.text(`Order ID: ${order._id}`);
   doc.text(`Date: ${new Date().toLocaleDateString()}`);
   doc.text(`Status: ${status}`);
@@ -577,7 +577,6 @@ await new Promise((resolve, reject) => {///
 
   doc.moveDown();
 
-  // Customer Address
   doc.fontSize(14).text("Billing Address:");
   doc.fontSize(12);
   doc.text(order.address.addressLine);
@@ -587,8 +586,7 @@ await new Promise((resolve, reject) => {///
 
   doc.moveDown();
 
-  // Table Header
-  doc.fontSize(13).text("Item", 50, 280);
+ doc.fontSize(13).text("Item", 50, 280);
   doc.text("Qty", 280, 280);
   doc.text("Price", 350, 280);
   doc.text("Total", 450, 280);

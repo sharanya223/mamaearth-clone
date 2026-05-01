@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {//
+import {
   PieChart, Pie, Cell,
   BarChart, Bar, XAxis, YAxis,
   Tooltip, ResponsiveContainer,
@@ -31,7 +31,7 @@ function AdminDashboard() {
     setStats(res.data);
   };
 
-  const pieData = [//
+  const pieData = [
     { name: "Pending", value: stats.pending },
     { name: "Shipped", value: stats.shipped },
     { name: "Delivered", value: stats.delivered },
@@ -49,10 +49,10 @@ function AdminDashboard() {
       <h1>Admin Dashboard</h1>
 
       <div className="top-buttons">
-  <button onClick={() => navigate("/add-product")}>➕ Add Product</button>
-  <button onClick={() => navigate("/manage-products")}>📦 Manage Products</button>
-  <button onClick={() => navigate("/manage-orders")}>🛒 Manage Orders</button>
-   <button onClick={() => navigate("/")}>🚪 Logout</button>
+  <button onClick={() => navigate("/add-product")}> Add Product</button>
+  <button onClick={() => navigate("/manage-products")}> Manage Products</button>
+  <button onClick={() => navigate("/manage-orders")}> Manage Orders</button>
+   <button onClick={() => navigate("/")}> Logout</button>
 </div>
 
       <div className="cards">

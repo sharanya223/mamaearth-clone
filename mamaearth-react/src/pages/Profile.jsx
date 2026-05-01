@@ -24,7 +24,7 @@ function Profile() {
 
         <p>
           <strong>Status:</strong>{" "}
-          {storedUser?.isVerified ? "Verified ✅" : "Not Verified"}
+          {storedUser?.isVerified ? "Verified " : "Not Verified"}
         </p>
 
         <button onClick={() => navigate("/")}>

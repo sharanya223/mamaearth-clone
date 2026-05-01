@@ -56,7 +56,7 @@ function Yorder() {
                     }}
                   />
                 ) : (
-                  <div className="order-img no-image">🛍️</div>
+                  <div className="order-img no-image"></div>
                 )}
 
                 
