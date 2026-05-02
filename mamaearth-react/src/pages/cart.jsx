@@ -14,7 +14,7 @@ function ProductCart() {
     if (newQty < 1) return;//less then one stop
 
     try {
-      await axios.put("https://mamaearth-clone-1-x7wj.onrender.com/update-cart", {
+      await axios.put(`${import.meta.env.VITE_API_URL}/update-cart`, {
         userId,
         productId,
         quantity: newQty,
@@ -37,7 +37,7 @@ function ProductCart() {
   
   const removeItem = async (productId) => {
     try {
-      await axios.delete("https://mamaearth-clone-1-x7wj.onrender.com/remove-from-cart", {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/remove-from-cart`, {
         data: { userId, productId },
       });
 
@@ -76,7 +76,7 @@ function ProductCart() {
 
       try {
         const res = await axios.get(
-          `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
+          `${import.meta.env.VITE_API_URL}/get-cart/${userId}`
         );
 
         //setCartItems(res.data.products || []);

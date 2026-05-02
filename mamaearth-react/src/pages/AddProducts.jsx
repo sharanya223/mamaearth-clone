@@ -39,7 +39,7 @@ function AddProducts() {
     try {
 
       await axios.post(
-        "https://mamaearth-clone-1-x7wj.onrender.com/save-product-details",
+        `${import.meta.env.VITE_API_URL}/save-product-details`,
         formData
       );
 

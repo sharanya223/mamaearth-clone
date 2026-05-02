@@ -15,7 +15,7 @@ function SearchResults() {
   const fetchResults = async () => {
     try {
       const res = await axios.get(
-        `https://mamaearth-clone-1-x7wj.onrender.com/search/${query}`
+        `${import.meta.env.VITE_API_URL}/search/${query}`
       );
       setProducts(res.data);
     } catch (err) {

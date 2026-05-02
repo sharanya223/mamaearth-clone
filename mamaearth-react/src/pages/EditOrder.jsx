@@ -15,7 +15,7 @@ function EditOrder() {
 
   const fetchOrder = async () => {
     try {
-      const res = await axios.get(`https://mamaearth-clone-1-x7wj.onrender.com/get-order/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/get-order/${id}`);
       setOrder(res.data);
     } catch (error) {
       console.log(error);
@@ -33,7 +33,7 @@ function EditOrder() {
     try {
       
       for (let i = 0; i < order.products.length; i++) {//one order contains multiple products
-        await axios.put(`https://mamaearth-clone-1-x7wj.onrender.com/update-order/${id}`, {
+        await axios.put(`${import.meta.env.VITE_API_uRL}/update-order/${id}`, {
           productIndex: i,
           quantity: order.products[i].quantity,
           status: order.status,

@@ -15,7 +15,7 @@ function ManageProducts() {
   const fetchProducts = async () => {
     try {
 
-      const res = await axios.get("https://mamaearth-clone-1-x7wj.onrender.com/manage-products");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/manage-products`);
       setProducts(res.data);
 
     } catch (error) {
@@ -28,7 +28,7 @@ function ManageProducts() {
 
     try {
 
-      await axios.delete(`https://mamaearth-clone-1-x7wj.onrender.com/delete-product/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/delete-product/${id}`);
 
       alert("Product deleted successfully");
 

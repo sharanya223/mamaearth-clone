@@ -16,7 +16,7 @@ function Yorder() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        "https://mamaearth-clone-1-x7wj.onrender.com/manage-order"
+        `${import.meta.env.VITE_API_URL}/manage-order`
       );
 
       console.log("Orders Data:", res.data);
@@ -98,3 +98,4 @@ function Yorder() {
 }
 
 export default Yorder;
+//https://mamaearth-clone-2s2k.onrender.com

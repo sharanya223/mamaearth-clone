@@ -77,10 +77,16 @@ const razorpay = new Razorpay({
 });
 
 // MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log("MongoDB Atlas Connected"))
-  .catch((err) => console.log(err));
+//mongoose
+  //.connect(process.env.MONGO_URL)
+  //.then(() => console.log("MongoDB Atlas Connected"))
+  //.catch((err) => console.log(err));
+
+  mongoose.connect(process.env.MONGO_URL, {
+  family: 4,
+})
+.then(() => console.log("MongoDB Atlas Connected"))
+.catch(err => console.log(err));
 // Email transporter
 
 const transporter = nodemailer.createTransport({

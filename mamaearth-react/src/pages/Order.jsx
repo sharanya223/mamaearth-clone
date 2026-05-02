@@ -23,7 +23,7 @@ function Order() {
   const fetchCart = async () => {
     try {
       const res = await axios.get(
-        `https://mamaearth-clone-1-x7wj.onrender.com/get-cart/${userId}`
+        `${import.meta.env.VITE_API_URL}/get-cart/${userId}`
       );
 
       setProducts(

@@ -12,7 +12,7 @@ function ManageOrders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("https://mamaearth-clone-1-x7wj.onrender.com/manage-order");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/manage-order`);
       setOrders(res.data);
     } catch (error) {
       console.log(error);
@@ -21,7 +21,7 @@ function ManageOrders() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://mamaearth-clone-1-x7wj.onrender.com/delete-order/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/delete-order/${id}`);
       alert("Order deleted successfully");
       fetchOrders();
     } catch (error) {

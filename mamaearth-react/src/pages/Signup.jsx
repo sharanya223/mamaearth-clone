@@ -23,7 +23,7 @@ function Signup() {
   e.preventDefault();
 
   axios
-    .post("https://mamaearth-clone-1-x7wj.onrender.com/save-user-details", form)
+    .post(`${import.meta.env.VITE_API_URL}/save-user-details`, form)
     .then(() => {
       alert("Signup successful!");
       navigate("/");

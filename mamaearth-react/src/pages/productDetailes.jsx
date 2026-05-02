@@ -24,7 +24,7 @@ function ProductDetails() {
     }
 
     try {
-      await axios.post("https://mamaearth-clone-1-x7wj.onrender.com/add-to-cart", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/add-to-cart`, {
         userId,
         productId: product._id
       });
@@ -40,7 +40,7 @@ function ProductDetails() {
   // Fetch single product
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`https://mamaearth-clone-1-x7wj.onrender.com/get-Product/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/get-Product/${id}`);
       setProduct(res.data);
     } catch (error) {
       console.log(error);
